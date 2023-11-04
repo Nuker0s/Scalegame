@@ -7,12 +7,20 @@ public class playermovement : MonoBehaviour
     public Camera cam;
     public float speed;
     public float flyspeed;
+    public float groundspeedlimit;
     public float jumpforce;
+    public int jumps;
+
+    public int maxjumps;
     public float sense;
+    
     public PlayerInput pinput;
     public InputAction move;
     public InputAction look;
     public InputAction jump;
+    public float vaultspeed;
+    public Transform va1;
+    public Transform va2;
     public Rigidbody rb;
     public bool jumpsched = false;
     public Transform groundchecker;
@@ -40,6 +48,7 @@ public class playermovement : MonoBehaviour
         if (isgrounded())
         {
             grounded = true;
+            jumps = maxjumps;
         }
         else
         {
@@ -49,11 +58,30 @@ public class playermovement : MonoBehaviour
         {
             jumpsched = true;
         }
+        if (grounded)
+        {
+            rb.drag = 5;
+        }
+        else
+        {
+            rb.drag = 1f;
+        }
+
     }
     private void FixedUpdate()
     {
         movemento();
         jumperro();
+        
+    }
+    public void limitvelocity()
+    {
+        if (rb.velocity.magnitude>groundspeedlimit & grounded)
+        {
+            Vector3 limitspeed = rb.velocity.normalized;
+            limitspeed *= groundspeedlimit;
+            rb.velocity = new Vector3(limitspeed.x, rb.velocity.y, limitspeed.z);
+        }
     }
     public void movemento()
     {
@@ -67,6 +95,11 @@ public class playermovement : MonoBehaviour
         {
             rb.AddForce(moveforce * Time.deltaTime * flyspeed);
         }
+        if (!Physics.CheckSphere(va1.position, 0.2f, ground)&Physics.CheckSphere(va2.position, 0.2f, ground))
+        {
+            rb.velocity =new Vector3(rb.velocity.x, vaultspeed*Time.deltaTime, rb.velocity.z);
+        }
+
         
     }
 
@@ -78,10 +111,20 @@ public class playermovement : MonoBehaviour
     }
     public void jumperro()
     {
-        if (jumpsched & isgrounded())
+        if (jumpsched)
         {
-            rb.AddForce(0, jumpforce, 0);
-            jumpsched = false;
+            if ((isgrounded() || jumps > 0))
+            {
+                jumps -= 1;
+                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                rb.AddForce(0, jumpforce, 0);
+                jumpsched = false;
+            }
+            else
+            {
+                jumpsched=false;
+            }
+
         }
     }
     bool isgrounded()
