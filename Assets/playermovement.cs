@@ -58,21 +58,21 @@ public class playermovement : MonoBehaviour
         {
             jumpsched = true;
         }
-        if (grounded)
+        /*if (grounded)
         {
             rb.drag = 5;
         }
         else
         {
             rb.drag = 1f;
-        }
+        }*/
 
     }
     private void FixedUpdate()
     {
         movemento();
         jumperro();
-        
+        limitvelocity();
     }
     public void limitvelocity()
     {
