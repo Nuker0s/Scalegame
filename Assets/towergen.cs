@@ -23,6 +23,7 @@ public class towergen : MonoBehaviour
         for (int i = 0; i < height; i++)
         {
             generatenewroompos:
+            
             Vector3Int nextdir = randirex(-lastdir);
             
             Vector3Int newroompos = nextdir + lastroom.room;
@@ -46,14 +47,18 @@ public class towergen : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        
         if (rooms.Count > 1)
         {
             for (int i = 0; i < rooms.Count - 1; i++)
             {
+                Gizmos.color = Color.red;
                 Gizmos.DrawLine(rooms[i].room, rooms[i + 1].room);
+                Gizmos.color = Color.green;
+                Gizmos.DrawSphere(rooms[i].room, 0.1f);
             }
         }
+        
     }
     public class roomdata 
     {
