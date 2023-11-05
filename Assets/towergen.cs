@@ -12,34 +12,41 @@ public class towergen : MonoBehaviour
     public List<roomdata> rooms = new List<roomdata>();//list of all rooms
     public int height = 10;
     public float cubeSize = 1f;
-    public float sidewaysChance = 0.5f;
+    public float sidewaysChance = 50;
     public float sidewaysOffset = 1f;
+    public bool regenerate;
     void Start()
     {
-        Vector3 position = transform.position;
+        
         Vector3Int lastdir = -directions[0];
         roomdata lastroom = new roomdata(new Vector3Int(0,0,0));
-        
+
         for (int i = 0; i < height; i++)
         {
             Vector3Int nextdir;
-            generatenewroompos:
-            if (5>Random.Range(0,10))
-            {
-                nextdir = randirex(-lastdir);
-            }
-            else
-            {
-                nextdir = lastdir;
-            }
-            
-            
-            Vector3Int newroompos = nextdir + lastroom.room;
-            if (IsPositionTaken(newroompos))
-            {
-                goto generatenewroompos;
-            }
+            Vector3Int newroompos;
+            while (true) 
+            { 
+                if (Random.Range(0, 100)<sidewaysChance)
+                {
+                    nextdir = randirex(-lastdir);
+                }
+                else
+                {
+                    nextdir = lastdir;
+                }
 
+
+                newroompos = nextdir + lastroom.room;
+                if (IsPositionTaken(newroompos))
+                {
+                    
+                }
+                else
+                {
+                    break;
+                }
+            }
             roomdata roomdata = new roomdata(newroompos);
 
             lastdir = nextdir;
@@ -53,6 +60,52 @@ public class towergen : MonoBehaviour
         {
             Instantiate(cubePrefab, item.room, Quaternion.identity);
         }*/
+    }
+    private void Update()
+    {
+        if (regenerate)
+        {
+            rooms.Clear();
+            regenerate = false;
+            Vector3Int lastdir = -directions[0];
+            roomdata lastroom = new roomdata(new Vector3Int(0, 0, 0));
+
+            for (int i = 0; i < height; i++)
+            {
+                Vector3Int nextdir;
+                Vector3Int newroompos;
+                while (true)
+                {
+                    if (Random.Range(0, 100) < sidewaysChance)
+                    {
+                        nextdir = randirex(-lastdir);
+                    }
+                    else
+                    {
+                        nextdir = lastdir;
+                    }
+
+
+                    newroompos = nextdir + lastroom.room;
+                    if (IsPositionTaken(newroompos))
+                    {
+
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                roomdata roomdata = new roomdata(newroompos);
+
+                lastdir = nextdir;
+                roomdata.lastroom = lastroom.room;
+                lastroom.nextroom = roomdata.room;
+                lastroom = roomdata;
+                rooms.Add(roomdata);
+            }
+
+        }
     }
     private void OnDrawGizmos()
     {
@@ -96,10 +149,10 @@ public class towergen : MonoBehaviour
     public static Vector3Int randirex(Vector3Int exclude)
     {
         List<Vector3Int> tempDirections = new List<Vector3Int>(directions);
-        if (exclude != -directions[0])
+        /*if (exclude != -directions[0])
         {
             tempDirections.Remove(exclude);
-        }
+        }*/
         
 
         return tempDirections[Random.Range(0, tempDirections.Count)];
