@@ -9,7 +9,7 @@ public class towergen : MonoBehaviour
 {
     public static Vector3Int[] directions = new Vector3Int[] {Vector3Int.up,/*Vector3Int.down,*/Vector3Int.left,Vector3Int.right,Vector3Int.forward,Vector3Int.back};
     public GameObject cubePrefab;
-    public List<roomdata> rooms = new List<roomdata>();
+    public List<roomdata> rooms = new List<roomdata>();//list of all rooms
     public int height = 10;
     public float cubeSize = 1f;
     public float sidewaysChance = 0.5f;
@@ -22,9 +22,17 @@ public class towergen : MonoBehaviour
         
         for (int i = 0; i < height; i++)
         {
+            Vector3Int nextdir;
             generatenewroompos:
+            if (5>Random.Range(0,10))
+            {
+                nextdir = randirex(-lastdir);
+            }
+            else
+            {
+                nextdir = lastdir;
+            }
             
-            Vector3Int nextdir = randirex(-lastdir);
             
             Vector3Int newroompos = nextdir + lastroom.room;
             if (IsPositionTaken(newroompos))
@@ -40,6 +48,7 @@ public class towergen : MonoBehaviour
             lastroom = roomdata;
             rooms.Add(roomdata);
         }
+        //Debug.Log(rooms[31].nextroom + ", " + rooms[31].room + ", " + rooms[31].lastroom);
         /*foreach (var item in rooms)
         {
             Instantiate(cubePrefab, item.room, Quaternion.identity);
