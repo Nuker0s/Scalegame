@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class towergen : MonoBehaviour
 {
@@ -17,16 +19,47 @@ public class towergen : MonoBehaviour
         Vector3 position = transform.position;
         Vector3Int lastdir = -directions[0];
         roomdata lastroom = new roomdata(new Vector3Int(0,0,0));
+        
         for (int i = 0; i < height; i++)
         {
+            generatenewroompos:
+            Vector3Int nextdir = randirex(-lastdir);
+            
+            Vector3Int newroompos = nextdir + lastroom.room;
+            if (IsPositionTaken(newroompos))
+            {
+                goto generatenewroompos;
+            }
 
+            roomdata roomdata = new roomdata(newroompos);
+
+            lastdir = nextdir;
+            roomdata.lastroom = lastroom.room;
+            lastroom.nextroom = roomdata.room;
+            lastroom = roomdata;
+            rooms.Add(roomdata);
+        }
+        /*foreach (var item in rooms)
+        {
+            Instantiate(cubePrefab, item.room, Quaternion.identity);
+        }*/
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        if (rooms.Count > 1)
+        {
+            for (int i = 0; i < rooms.Count - 1; i++)
+            {
+                Gizmos.DrawLine(rooms[i].room, rooms[i + 1].room);
+            }
         }
     }
     public class roomdata 
     {
-        Vector3Int lastroom;
-        Vector3Int room;
-        Vector3Int nextroom;
+        public Vector3Int lastroom;
+        public Vector3Int room;
+        public Vector3Int nextroom;
         public roomdata() { }
         public roomdata(Vector3Int newroom)
         {
@@ -49,8 +82,24 @@ public class towergen : MonoBehaviour
     public static Vector3Int randirex(Vector3Int exclude)
     {
         List<Vector3Int> tempDirections = new List<Vector3Int>(directions);
-        tempDirections.Remove(exclude);
+        if (exclude != -directions[0])
+        {
+            tempDirections.Remove(exclude);
+        }
+        
 
         return tempDirections[Random.Range(0, tempDirections.Count)];
     }
+    public bool IsPositionTaken(Vector3Int position)
+    {
+        foreach (var room in rooms)
+        {
+            if (room.room == position)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
