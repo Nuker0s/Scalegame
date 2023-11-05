@@ -13,7 +13,7 @@ public class towergen : MonoBehaviour
     public int height = 10;
     public float cubeSize = 1f;
     public float sidewaysChance = 50;
-    public float sidewaysOffset = 1f;
+    
     public bool regenerate;
     void Start()
     {
