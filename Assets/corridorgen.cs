@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 public class RoomGenerator : MonoBehaviour
@@ -20,15 +21,19 @@ public class RoomGenerator : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
-            GameObject wallroot = Instantiate(new GameObject("wallroot"),roomroot.position,roomroot.rotation,roomroot);
+            Transform wallroot = Instantiate(new GameObject("wallroot"),roomroot.position,quaternion.identity,roomroot).GetComponent<Transform>();
+            float offset = size * quadsize;
+            wallroot.position += wallroot.right * offset*0.5f;
             for (int x = 0; x < size; x++)
             {
                 for (int y = 0; y < size; y++)
                 {
-
+                    Instantiate(quad,wallroot.position + new Vector3(x*quadsize,y*quadsize) - new Vector3(offset*0.5f-quadsize/2, offset * 0.5f - quadsize / 2), quaternion.identity,wallroot);
+                    
                 }
             }
-            roomroot.Rotate(0, 90 * i, 0);
+            wallroot.Rotate(0, 90, 0);
+            roomroot.Rotate(0, 90, 0);
         }
 
     }
