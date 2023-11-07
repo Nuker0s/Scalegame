@@ -13,21 +13,36 @@ public class towergen : MonoBehaviour
     public int height = 10;
     public float cubeSize = 1f;
     public float sidewaysChance = 50;
-    
+    private Vector3Int lastdir = -directions[0];
+    private roomdata lastroom = new roomdata(new Vector3Int(0, 0, 0));
+
     public bool regenerate;
     void Start()
     {
-        
-        Vector3Int lastdir = -directions[0];
-        roomdata lastroom = new roomdata(new Vector3Int(0,0,0));
 
-        for (int i = 0; i < height; i++)
+    }
+    private void Update()
+    {
+        if (regenerate)
+        {
+            //rooms.Clear();
+            regenerate = false;
+
+            roomgen(1, sidewaysChance);
+
+
+        }
+    }
+    
+    public void roomgen(int number,float sidewayschance) 
+    {
+        for (int i = 0; i < number; i++)
         {
             Vector3Int nextdir;
             Vector3Int newroompos;
-            while (true) 
-            { 
-                if (Random.Range(0, 100)<sidewaysChance)
+            while (true)
+            {
+                if (Random.Range(0, 100) < sidewayschance)
                 {
                     nextdir = randirex(-lastdir);
                 }
@@ -40,7 +55,7 @@ public class towergen : MonoBehaviour
                 newroompos = nextdir + lastroom.room;
                 if (IsPositionTaken(newroompos))
                 {
-                    
+
                 }
                 else
                 {
@@ -54,57 +69,6 @@ public class towergen : MonoBehaviour
             lastroom.nextroom = roomdata.room;
             lastroom = roomdata;
             rooms.Add(roomdata);
-        }
-        //Debug.Log(rooms[31].nextroom + ", " + rooms[31].room + ", " + rooms[31].lastroom);
-        /*foreach (var item in rooms)
-        {
-            Instantiate(cubePrefab, item.room, Quaternion.identity);
-        }*/
-    }
-    private void Update()
-    {
-        if (regenerate)
-        {
-            rooms.Clear();
-            regenerate = false;
-            Vector3Int lastdir = -directions[0];
-            roomdata lastroom = new roomdata(new Vector3Int(0, 0, 0));
-
-            for (int i = 0; i < height; i++)
-            {
-                Vector3Int nextdir;
-                Vector3Int newroompos;
-                while (true)
-                {
-                    if (Random.Range(0, 100) < sidewaysChance)
-                    {
-                        nextdir = randirex(-lastdir);
-                    }
-                    else
-                    {
-                        nextdir = lastdir;
-                    }
-
-
-                    newroompos = nextdir + lastroom.room;
-                    if (IsPositionTaken(newroompos))
-                    {
-
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-                roomdata roomdata = new roomdata(newroompos);
-
-                lastdir = nextdir;
-                roomdata.lastroom = lastroom.room;
-                lastroom.nextroom = roomdata.room;
-                lastroom = roomdata;
-                rooms.Add(roomdata);
-            }
-
         }
     }
     private void OnDrawGizmos()
