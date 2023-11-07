@@ -14,7 +14,7 @@ public class RoomGenerator : MonoBehaviour
         if (generate)
         {
             generate = false;
-            roomgen();
+            kolanogen();
         }
     }
     public void roomgen()
@@ -63,7 +63,7 @@ public class RoomGenerator : MonoBehaviour
         }
         wallroot = Instantiate(new GameObject("wallroot"), roomroot.position, quaternion.identity, roomroot).GetComponent<Transform>();
         
-        wallroot.position += wallroot.right * offset * 0.5f;
+        wallroot.position += wallroot.up * offset * 0.5f;
         for (int x = 0; x < size; x++)
         {
             for (int y = 0; y < size; y++)
@@ -72,7 +72,7 @@ public class RoomGenerator : MonoBehaviour
 
             }
         }
-        wallroot.Rotate(0, 90, 0);
-        roomroot.Rotate(90, 0, 0);
+        wallroot.Rotate(-90, 0, 0);
+        //roomroot.Rotate(90, 0, 0);
     }
 }

@@ -27,8 +27,11 @@ public class towergen : MonoBehaviour
         {
             //rooms.Clear();
             regenerate = false;
-
-            roomgen(1, sidewaysChance);
+            for (int i = 0; i < 5; i++)
+            {
+                roomgen(1, sidewaysChance);
+            }
+            
 
 
         }
