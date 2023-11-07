@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 
 public class towergen : MonoBehaviour
 {
+    public GameObject roomgenprefab;
     public static Vector3Int[] directions = new Vector3Int[] {Vector3Int.up,/*Vector3Int.down,*/Vector3Int.left,Vector3Int.right,Vector3Int.forward,Vector3Int.back};
     public GameObject cubePrefab;
     public List<roomdata> rooms = new List<roomdata>();//list of all rooms
@@ -16,10 +17,11 @@ public class towergen : MonoBehaviour
     private Vector3Int lastdir = -directions[0];
     private roomdata lastroom = new roomdata(new Vector3Int(0, 0, 0));
 
+
     public bool regenerate;
     void Start()
     {
-
+        regenerate = true;
     }
     private void Update()
     {
@@ -27,17 +29,19 @@ public class towergen : MonoBehaviour
         {
             //rooms.Clear();
             regenerate = false;
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 9; i++)
             {
-                roomgen(1, sidewaysChance);
+                roomplacer(1, sidewaysChance);
             }
-            
 
-
+            foreach (roomdata room in rooms)
+            {
+                
+            }
         }
     }
     
-    public void roomgen(int number,float sidewayschance) 
+    public void roomplacer(int number,float sidewayschance) 
     {
         for (int i = 0; i < number; i++)
         {
@@ -89,7 +93,7 @@ public class towergen : MonoBehaviour
         }
         
     }
-    public class roomdata 
+    public class roomdata
     {
         public Vector3Int lastroom;
         public Vector3Int room;

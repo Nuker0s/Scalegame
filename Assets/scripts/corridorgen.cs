@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class RoomGenerator : MonoBehaviour
 {
-    public Transform roomroot;
+    //public Transform transform;
     //public Transform roomwall;
     public int size;
     public int quadsize;
@@ -23,7 +23,7 @@ public class RoomGenerator : MonoBehaviour
         float offset = size * quadsize;
         for (int i = 0; i < 4; i++)
         {
-            wallroot = Instantiate(new GameObject("wallroot"),roomroot.position,quaternion.identity,roomroot).GetComponent<Transform>();
+            wallroot = Instantiate(new GameObject("wallroot"),transform.position,quaternion.identity,transform).GetComponent<Transform>();
             
             wallroot.position += wallroot.right * offset*0.5f;
             for (int x = 0; x < size; x++)
@@ -35,7 +35,7 @@ public class RoomGenerator : MonoBehaviour
                 }
             }
             wallroot.Rotate(0, 90, 0);
-            roomroot.Rotate(0, 90, 0);
+            transform.Rotate(0, 90, 0);
         }
 
         
@@ -44,10 +44,10 @@ public class RoomGenerator : MonoBehaviour
     {
         float offset = size * quadsize;
         Transform wallroot;
-        roomroot.Rotate(0, 90, 0);
+        transform.Rotate(0, 90, 0);
         for (int i = 0; i < 3; i++)
         {
-            wallroot = Instantiate(new GameObject("wallroot"), roomroot.position, quaternion.identity, roomroot).GetComponent<Transform>();
+            wallroot = Instantiate(new GameObject("wallroot"), transform.position, quaternion.identity, transform).GetComponent<Transform>();
             
             wallroot.position += wallroot.right * offset * 0.5f;
             for (int x = 0; x < size; x++)
@@ -59,9 +59,9 @@ public class RoomGenerator : MonoBehaviour
                 }
             }
             wallroot.Rotate(0, 90, 0);
-            roomroot.Rotate(0, 90, 0);
+            transform.Rotate(0, 90, 0);
         }
-        wallroot = Instantiate(new GameObject("wallroot"), roomroot.position, quaternion.identity, roomroot).GetComponent<Transform>();
+        wallroot = Instantiate(new GameObject("wallroot"), transform.position, quaternion.identity, transform).GetComponent<Transform>();
         
         wallroot.position += wallroot.up * offset * 0.5f;
         for (int x = 0; x < size; x++)
