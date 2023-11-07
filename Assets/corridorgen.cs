@@ -20,7 +20,7 @@ public class RoomGenerator : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
-            GameObject wallroot = new GameObject("wall");
+            GameObject wallroot = Instantiate(new GameObject("wallroot"),roomroot.position,roomroot.rotation,roomroot);
             for (int x = 0; x < size; x++)
             {
                 for (int y = 0; y < size; y++)
@@ -28,6 +28,7 @@ public class RoomGenerator : MonoBehaviour
 
                 }
             }
+            roomroot.Rotate(0, 90 * i, 0);
         }
 
     }
