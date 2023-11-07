@@ -29,14 +29,26 @@ public class towergen : MonoBehaviour
         {
             //rooms.Clear();
             regenerate = false;
-            for (int i = 0; i < 9; i++)
+            for (int i = 0; i < 8; i++)
             {
                 roomplacer(1, sidewaysChance);
             }
 
             foreach (roomdata room in rooms)
             {
-                
+                if (!room.Generated)
+                {
+
+                    if (room.nextroom != null)
+                    {
+                        RoomGenerator romgen = Instantiate(roomgenprefab, room.room, Quaternion.identity, transform).GetComponent<RoomGenerator>();
+                        romgen.transform.position = romgen.transform.position * romgen.size * romgen.quadsize;
+
+                        romgen.roomgen();
+                        Debug.Log(room.nextroom - room.room);
+                        romgen.transform.rotation = Quaternion.LookRotation(room.nextroom - room.room,Vector3.up);
+                    }
+                }
             }
         }
     }
@@ -98,6 +110,7 @@ public class towergen : MonoBehaviour
         public Vector3Int lastroom;
         public Vector3Int room;
         public Vector3Int nextroom;
+        public bool Generated = false;
         public roomdata() { }
         public roomdata(Vector3Int newroom)
         {
