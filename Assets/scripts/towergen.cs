@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 public class towergen : MonoBehaviour
 {
     public GameObject roomgenprefab;
+
     public static Vector3Int[] directions = new Vector3Int[] {Vector3Int.up,/*Vector3Int.down,*/Vector3Int.left,Vector3Int.right,Vector3Int.forward,Vector3Int.back};
     public GameObject cubePrefab;
     public List<roomdata> rooms = new List<roomdata>();//list of all rooms
@@ -29,7 +30,7 @@ public class towergen : MonoBehaviour
         {
             //rooms.Clear();
             regenerate = false;
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 20; i++)
             {
                 roomplacer(1, sidewaysChance);
             }
@@ -39,17 +40,56 @@ public class towergen : MonoBehaviour
                 if (!room.Generated)
                 {
 
-                    if (room.nextroom != null)
+                    if (true)
                     {
-                        RoomGenerator romgen = Instantiate(roomgenprefab, room.room, Quaternion.identity, transform).GetComponent<RoomGenerator>();
-                        romgen.transform.position = romgen.transform.position * romgen.size * romgen.quadsize;
 
-                        romgen.roomgen();
-                        Debug.Log(room.nextroom - room.room);
-                        romgen.transform.rotation = Quaternion.LookRotation(room.nextroom - room.room,Vector3.up);
+                        if (Vector3.Dot(room.lastroom - room.room, room.room - room.nextroom) == 0)
+                        {
+                            print("corner " + room.room);
+                            RoomGenerator romgen = Instantiate(roomgenprefab, room.room, Quaternion.identity, transform).GetComponent<RoomGenerator>();
+                            romgen.transform.position = romgen.transform.position * romgen.size * romgen.quadsize;
+
+                            romgen.kolanogen();
+                            Debug.Log(room.nextroom - room.room);
+                            for (int i = 0; i < romgen.transform.childCount; i++)
+                            {
+                                if (romgen.transform.GetChild(i).forward == room.nextroom-room.room)
+                                {
+                                    Destroy(romgen.transform.GetChild(i).gameObject);
+                                }
+                                if (romgen.transform.GetChild(i).forward == room.lastroom - room.room)
+                                {
+                                    Destroy(romgen.transform.GetChild(i).gameObject);
+                                }
+                            }
+                            
+                        }
+                        else
+                        {
+
+
+                            RoomGenerator romgen = Instantiate(roomgenprefab, room.room, Quaternion.identity, transform).GetComponent<RoomGenerator>();
+                            romgen.transform.position = romgen.transform.position * romgen.size * romgen.quadsize;
+
+                            romgen.roomgen();
+                            Debug.Log(room.nextroom - room.room);
+
+                            romgen.transform.rotation = Quaternion.Euler(Quaternion.LookRotation(room.nextroom - room.room).eulerAngles - new Vector3(90, 0, 0));
+                        }
                     }
                 }
             }
+
+        }
+        for (int i = 1; i < transform.childCount - 1; i++)
+        {
+            if (transform.GetChild(i).name == "kolano")
+            {
+
+
+
+            }
+
         }
     }
     

@@ -43050,10 +43050,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomgenprefab: {fileID: 1695668736}
+  debug1: {x: 0, y: 90, z: 0}
+  debug2: {x: 0, y: 0, z: 0}
+  debug3: {x: 90, y: 0, z: 90}
   cubePrefab: {fileID: 1653986188}
   height: 300
   cubeSize: 1
-  sidewaysChance: 70
+  sidewaysChance: 90
   regenerate: 1
 --- !u!4 &822298826
 Transform:
