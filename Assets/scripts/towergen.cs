@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 public class towergen : MonoBehaviour
 {
     public GameObject roomgenprefab;
+
     public static Vector3Int[] directions = new Vector3Int[] {Vector3Int.up,/*Vector3Int.down,*/Vector3Int.left,Vector3Int.right,Vector3Int.forward,Vector3Int.back};
     public GameObject cubePrefab;
     public List<roomdata> rooms = new List<roomdata>();//list of all rooms
@@ -16,6 +17,7 @@ public class towergen : MonoBehaviour
     public float sidewaysChance = 50;
     private Vector3Int lastdir = -directions[0];
     private roomdata lastroom = new roomdata(new Vector3Int(0, 0, 0));
+
 
     public bool regenerate;
     void Start()
@@ -28,34 +30,44 @@ public class towergen : MonoBehaviour
         {
             //rooms.Clear();
             regenerate = false;
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 20; i++)
             {
                 roomplacer(1, sidewaysChance);
             }
 
-            for (int o = 0; o < rooms.Count-1; o++)
-            { 
-                roomdata room = rooms[o];
-                
-            
+            foreach (roomdata room in rooms)
+            {
                 if (!room.Generated)
                 {
 
-                    if (room.nextroom != null)
+                    if (true)
                     {
-                        RoomGenerator romgen = Instantiate(roomgenprefab, room.room, Quaternion.identity, transform).GetComponent<RoomGenerator>();
-                        romgen.transform.position = romgen.transform.position * romgen.size * romgen.quadsize;
 
-<<<<<<< HEAD
                         if (Vector3.Dot(room.lastroom - room.room, room.room - room.nextroom) == 0)
                         {
+                            print("corner " + room.room);
+                            RoomGenerator romgen = Instantiate(roomgenprefab, room.room, Quaternion.identity, transform).GetComponent<RoomGenerator>();
+                            romgen.transform.position = romgen.transform.position * romgen.size * romgen.quadsize;
 
-                            roomgenprefab.GetComponent<RoomGenerator>().kolanogen(room, roomgenprefab);
-
+                            romgen.kolanogen();
+                            Debug.Log(room.nextroom - room.room);
+                            for (int i = 0; i < romgen.transform.childCount; i++)
+                            {
+                                if (romgen.transform.GetChild(i).forward == room.nextroom-room.room)
+                                {
+                                    Destroy(romgen.transform.GetChild(i).gameObject);
+                                }
+                                if (romgen.transform.GetChild(i).forward == room.lastroom - room.room)
+                                {
+                                    Destroy(romgen.transform.GetChild(i).gameObject);
+                                }
+                            }
                             
                         }
                         else
                         {
+
+
                             RoomGenerator romgen = Instantiate(roomgenprefab, room.room, Quaternion.identity, transform).GetComponent<RoomGenerator>();
                             romgen.transform.position = romgen.transform.position * romgen.size * romgen.quadsize;
 
@@ -74,21 +86,11 @@ public class towergen : MonoBehaviour
             if (transform.GetChild(i).name == "kolano")
             {
 
+
+
             }
 
-=======
-                        romgen.roomgen();
-                        Debug.Log(room.nextroom - room.room);
-                        romgen.transform.rotation = Quaternion.LookRotation(room.nextroom - room.room,Vector3.up);
-                    }
-                }
-            }
->>>>>>> parent of d872c3a (aa)
         }
-    }
-    public void roomdestroyer() 
-    {
-
     }
     
     public void roomplacer(int number,float sidewayschance) 
@@ -149,7 +151,6 @@ public class towergen : MonoBehaviour
         public Vector3Int room;
         public Vector3Int nextroom;
         public bool Generated = false;
-        public GameObject root;
         public roomdata() { }
         public roomdata(Vector3Int newroom)
         {
@@ -167,11 +168,17 @@ public class towergen : MonoBehaviour
             nextroom = newnewroom;
         }
 
+
     }
     public static Vector3Int randirex(Vector3Int exclude)
     {
         List<Vector3Int> tempDirections = new List<Vector3Int>(directions);
+        /*if (exclude != -directions[0])
+        {
+            tempDirections.Remove(exclude);
+        }*/
         
+
         return tempDirections[Random.Range(0, tempDirections.Count)];
     }
     public bool IsPositionTaken(Vector3Int position)
