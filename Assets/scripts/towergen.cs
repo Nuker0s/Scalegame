@@ -17,7 +17,7 @@ public class towergen : MonoBehaviour
     public float sidewaysChance = 50;
     private Vector3Int lastdir = -directions[0];
     private roomdata lastroom = new roomdata(new Vector3Int(0, 0, 0));
-
+    public bool delete=false;
 
     public bool regenerate;
     void Start()
@@ -26,17 +26,24 @@ public class towergen : MonoBehaviour
     }
     private void Update()
     {
+        if (delete)
+        {
+            delete = false;
+            rooms.RemoveAt(0);
+            Destroy(transform.GetChild(0).gameObject);
+        }
         if (regenerate)
         {
             //rooms.Clear();
             regenerate = false;
-            for (int i = 0; i < 20; i++)
-            {
-                roomplacer(1, sidewaysChance);
-            }
 
-            foreach (roomdata room in rooms)
+                roomplacer(5, sidewaysChance);
+           
+
+            for (int o = 0; o < rooms.Count-1; o++)
             {
+                roomdata room = rooms[o];
+
                 if (!room.Generated)
                 {
 
@@ -62,6 +69,7 @@ public class towergen : MonoBehaviour
                                     Destroy(romgen.transform.GetChild(i).gameObject);
                                 }
                             }
+                            room.Generated = true;
                             
                         }
                         else
@@ -75,6 +83,7 @@ public class towergen : MonoBehaviour
                             Debug.Log(room.nextroom - room.room);
 
                             romgen.transform.rotation = Quaternion.Euler(Quaternion.LookRotation(room.nextroom - room.room).eulerAngles - new Vector3(90, 0, 0));
+                            room.Generated = true;
                         }
                     }
                 }

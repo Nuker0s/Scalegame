@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8411014366355012431}
   - component: {fileID: 3767294484630890291}
+  - component: {fileID: -1602111308130334652}
   m_Layer: 0
   m_Name: Roomgen
   m_TagString: Untagged
@@ -48,3 +49,24 @@ MonoBehaviour:
   quadsize: 4
   quad: {fileID: 0}
   generate: 1
+--- !u!65 &-1602111308130334652
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2901999077826037216}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
