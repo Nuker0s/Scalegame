@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8411014366355012431}
-  - component: {fileID: 3767294484630890291}
+  - component: {fileID: 8436255146638495153}
   m_Layer: 0
   m_Name: Roomgen
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3767294484630890291
+--- !u!114 &8436255146638495153
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,10 +41,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2901999077826037216}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8dbf0a501a45ba41b9d1783c98ed7e1, type: 3}
+  m_Script: {fileID: 11500000, guid: ebcd2daa9e128464c9da046a06098e40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 8
+  size: 4
   quadsize: 4
-  quad: {fileID: 0}
-  generate: 1
+  quad: {fileID: 2468536396798033251, guid: 34aa7f6ac9d2bad4cafdfc791f3403db, type: 3}
+  generate: 0

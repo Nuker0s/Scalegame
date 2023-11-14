@@ -14,7 +14,7 @@ public class RoomGenerator : MonoBehaviour
         if (generate)
         {
             generate = false;
-            kolanogen();
+            //kolanogen();
         }
     }
     public void roomgen()
@@ -40,13 +40,16 @@ public class RoomGenerator : MonoBehaviour
 
         
     }
-    public void kolanogen() 
+    public void kolanogen(towergen.roomdata room,GameObject roomgenprefab) 
     {
+        print("corner " + room.room);
+        RoomGenerator romgen = Instantiate(roomgenprefab, room.room, Quaternion.identity, transform).GetComponent<RoomGenerator>();
+        romgen.transform.position = romgen.transform.position * romgen.size * romgen.quadsize;
+        room.root = romgen.gameObject;
         float offset = size * quadsize;
         Transform wallroot;
-        transform.name = "kolano";
-        
-        for (int i = 0; i < 4; i++)
+        transform.Rotate(0, 90, 0);
+        for (int i = 0; i < 3; i++)
         {
             wallroot = Instantiate(new GameObject("wallroot"), transform.position, quaternion.identity, transform).GetComponent<Transform>();
             
@@ -74,6 +77,7 @@ public class RoomGenerator : MonoBehaviour
             }
         }
         wallroot.Rotate(-90, 0, 0);
+<<<<<<< HEAD
         transform.Rotate(180, 0, 0);
         wallroot = Instantiate(new GameObject("wallroot"), transform.position, quaternion.identity, transform).GetComponent<Transform>();
         
@@ -91,6 +95,20 @@ public class RoomGenerator : MonoBehaviour
         
         wallroot.Rotate(90, 0, 0);
         wallroot.Rotate(180, 0, 0);
-
+        Debug.Log(room.nextroom - room.room);
+        for (int i = 0; i < romgen.transform.childCount; i++)
+        {
+            if (romgen.transform.GetChild(i).forward == room.nextroom - room.room)
+            {
+                Destroy(romgen.transform.GetChild(i).gameObject);
+            }
+            if (romgen.transform.GetChild(i).forward == room.lastroom - room.room)
+            {
+                Destroy(romgen.transform.GetChild(i).gameObject);
+            }
+        }
+=======
+        //roomroot.Rotate(90, 0, 0);
+>>>>>>> parent of d872c3a (aa)
     }
 }
