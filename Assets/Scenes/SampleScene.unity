@@ -43050,13 +43050,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomgenprefab: {fileID: 1695668736}
-  debug1: {x: 0, y: 90, z: 0}
-  debug2: {x: 0, y: 0, z: 0}
-  debug3: {x: 90, y: 0, z: 90}
+  roomgenopt: {fileID: 0}
+  player: {fileID: 1640588212}
   cubePrefab: {fileID: 1653986188}
   height: 300
   cubeSize: 1
   sidewaysChance: 90
+  delete: 0
+  roomstoplace: 7
   regenerate: 1
 --- !u!4 &822298826
 Transform:
@@ -86394,7 +86395,7 @@ MonoBehaviour:
   groundspeedlimit: 10
   jumpforce: 500
   jumps: 0
-  maxjumps: 1
+  maxjumps: 100
   sense: 30
   pinput: {fileID: 1640588206}
   move:
@@ -112366,7 +112367,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

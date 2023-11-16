@@ -8,7 +8,8 @@ using UnityEngine.UIElements;
 public class towergen : MonoBehaviour
 {
     public GameObject roomgenprefab;
-
+    public RoomGenerator roomgenopt;
+    public Transform player;
     public static Vector3Int[] directions = new Vector3Int[] {Vector3Int.up,/*Vector3Int.down,*/Vector3Int.left,Vector3Int.right,Vector3Int.forward,Vector3Int.back};
     public GameObject cubePrefab;
     public List<roomdata> rooms = new List<roomdata>();//list of all rooms
@@ -18,90 +19,123 @@ public class towergen : MonoBehaviour
     private Vector3Int lastdir = -directions[0];
     private roomdata lastroom = new roomdata(new Vector3Int(0, 0, 0));
     public bool delete=false;
-
+    public int roomstoplace;
     public bool regenerate;
     void Start()
     {
-        regenerate = true;
+        if (roomgenopt == null)
+        {
+            roomgenopt = roomgenprefab.GetComponent<RoomGenerator>();
+        }
+        for (int i = 0; i < 3; i++)
+        {
+            roomplacer(1, sidewaysChance);
+            
+        }
+        generaterooms();
+
     }
     private void Update()
     {
-        if (delete)
+        Transform curroom = transform.GetChild(0);
+        foreach (Transform room in transform)
         {
-            delete = false;
-            rooms.RemoveAt(0);
-            Destroy(transform.GetChild(0).gameObject);
+            float roomsize = roomgenopt.size * roomgenopt.quadsize;
+            Bounds roombound = new Bounds(room.position,new Vector3(roomsize,roomsize,roomsize));
+            
+            if (roombound.Contains(player.position))
+            {
+                curroom=room; break;
+            }
         }
+        if (curroom.GetSiblingIndex() != 0)
+        {
+            Debug.Log(curroom.GetSiblingIndex());
+            
+        }
+
+        for (int i = 0; i < curroom.GetSiblingIndex() - 2; i++)
+        {
+            roomplacer(1, sidewaysChance);
+            generaterooms();
+            deleteroom();
+        }
+
         if (regenerate)
         {
             //rooms.Clear();
             regenerate = false;
+            roomplacer(roomstoplace, sidewaysChance);
+            generaterooms();
 
-                roomplacer(5, sidewaysChance);
-           
+        }
+        if (delete)
+        {
+            delete = false;
+            deleteroom();
 
-            for (int o = 0; o < rooms.Count-1; o++)
+        }
+
+    }
+    public void generaterooms() 
+    {
+        
+
+
+        for (int o = 0; o < rooms.Count - 1; o++)
+        {
+            roomdata room = rooms[o];
+
+            if (!room.Generated)
             {
-                roomdata room = rooms[o];
 
-                if (!room.Generated)
+                if (true)
                 {
 
-                    if (true)
+                    if (Vector3.Dot(room.lastroom - room.room, room.room - room.nextroom) == 0)
+                    {
+                        //print("corner " + room.room);
+                        RoomGenerator romgen = Instantiate(roomgenprefab, room.room, Quaternion.identity, transform).GetComponent<RoomGenerator>();
+                        romgen.transform.position = romgen.transform.position * romgen.size * romgen.quadsize;
+
+                        romgen.kolanogen();
+                        //Debug.Log(room.nextroom - room.room);
+                        for (int i = 0; i < romgen.transform.childCount; i++)
+                        {
+                            if (romgen.transform.GetChild(i).forward == room.nextroom - room.room)
+                            {
+                                Destroy(romgen.transform.GetChild(i).gameObject);
+                            }
+                            if (romgen.transform.GetChild(i).forward == room.lastroom - room.room)
+                            {
+                                Destroy(romgen.transform.GetChild(i).gameObject);
+                            }
+                        }
+                        room.Generated = true;
+
+                    }
+                    else
                     {
 
-                        if (Vector3.Dot(room.lastroom - room.room, room.room - room.nextroom) == 0)
-                        {
-                            print("corner " + room.room);
-                            RoomGenerator romgen = Instantiate(roomgenprefab, room.room, Quaternion.identity, transform).GetComponent<RoomGenerator>();
-                            romgen.transform.position = romgen.transform.position * romgen.size * romgen.quadsize;
 
-                            romgen.kolanogen();
-                            Debug.Log(room.nextroom - room.room);
-                            for (int i = 0; i < romgen.transform.childCount; i++)
-                            {
-                                if (romgen.transform.GetChild(i).forward == room.nextroom-room.room)
-                                {
-                                    Destroy(romgen.transform.GetChild(i).gameObject);
-                                }
-                                if (romgen.transform.GetChild(i).forward == room.lastroom - room.room)
-                                {
-                                    Destroy(romgen.transform.GetChild(i).gameObject);
-                                }
-                            }
-                            room.Generated = true;
-                            
-                        }
-                        else
-                        {
+                        RoomGenerator romgen = Instantiate(roomgenprefab, room.room, Quaternion.identity, transform).GetComponent<RoomGenerator>();
+                        romgen.transform.position = romgen.transform.position * romgen.size * romgen.quadsize;
 
+                        romgen.roomgen();
+                        //Debug.Log(room.nextroom - room.room);
 
-                            RoomGenerator romgen = Instantiate(roomgenprefab, room.room, Quaternion.identity, transform).GetComponent<RoomGenerator>();
-                            romgen.transform.position = romgen.transform.position * romgen.size * romgen.quadsize;
-
-                            romgen.roomgen();
-                            Debug.Log(room.nextroom - room.room);
-
-                            romgen.transform.rotation = Quaternion.Euler(Quaternion.LookRotation(room.nextroom - room.room).eulerAngles - new Vector3(90, 0, 0));
-                            room.Generated = true;
-                        }
+                        romgen.transform.rotation = Quaternion.Euler(Quaternion.LookRotation(room.nextroom - room.room).eulerAngles - new Vector3(90, 0, 0));
+                        room.Generated = true;
                     }
                 }
             }
-
-        }
-        for (int i = 1; i < transform.childCount - 1; i++)
-        {
-            if (transform.GetChild(i).name == "kolano")
-            {
-
-
-
-            }
-
         }
     }
-    
+    public void deleteroom() 
+    {
+        rooms.RemoveAt(0);
+        Destroy(transform.GetChild(0).gameObject);
+    }
     public void roomplacer(int number,float sidewayschance) 
     {
         for (int i = 0; i < number; i++)
