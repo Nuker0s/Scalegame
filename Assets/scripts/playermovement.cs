@@ -10,7 +10,8 @@ public class playermovement : MonoBehaviour
     public float groundspeedlimit;
     public float jumpforce;
     public int jumps;
-
+    public float fallspeed;
+    public float maxadditionalfallspeed;
     public int maxjumps;
     public float sense;
     
@@ -44,6 +45,11 @@ public class playermovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
         lookero();
         if (isgrounded())
         {
@@ -72,6 +78,10 @@ public class playermovement : MonoBehaviour
     {
         movemento();
         jumperro();
+        if (!grounded && rb.velocity.y > maxadditionalfallspeed)
+        {
+            rb.velocity += new Vector3(0, -fallspeed, 0);
+        }
         limitvelocity();
     }
     public void limitvelocity()
