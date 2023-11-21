@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 public class playermovement : MonoBehaviour
 {
     public Camera cam;
+    public float grounddrag;
+    public float groundstopdrag;
+    public float skydrag;
     public float speed;
     public float flyspeed;
     public float groundspeedlimit;
@@ -15,6 +18,7 @@ public class playermovement : MonoBehaviour
     public int maxjumps;
     public float sense;
     
+
     public PlayerInput pinput;
     public InputAction move;
     public InputAction look;
@@ -51,6 +55,23 @@ public class playermovement : MonoBehaviour
             Cursor.visible = false;
         }
         lookero();
+        if (grounded) 
+        {
+            rb.drag = grounddrag;
+            if (!move.IsPressed())
+            {
+                rb.drag = groundstopdrag;
+            }
+        }
+        else
+        {
+            rb.drag = skydrag;
+        }
+        if (isgrounded() && !grounded)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        }
+
         if (isgrounded())
         {
             grounded = true;

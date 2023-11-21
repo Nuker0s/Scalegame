@@ -8,7 +8,9 @@ public class RoomGenerator : MonoBehaviour
     public int size;
     public int quadsize;
     public GameObject quad;
+
     public bool generate = false;
+    public Vector3 offsetrot;
     private void Update()
     {
         if (generate)
@@ -30,7 +32,7 @@ public class RoomGenerator : MonoBehaviour
             {
                 for (int y = 0; y < size; y++)
                 {
-                    Instantiate(quad,wallroot.position + new Vector3(x*quadsize,y*quadsize) - new Vector3(offset*0.5f-quadsize/2, offset * 0.5f - quadsize / 2), quaternion.identity,wallroot);
+                    Instantiate(quad,wallroot.position + new Vector3(x*quadsize,y*quadsize) - new Vector3(offset*0.5f-quadsize/2, offset * 0.5f - quadsize / 2), quaternion.Euler(offsetrot),wallroot);
                     
                 }
             }
@@ -55,7 +57,7 @@ public class RoomGenerator : MonoBehaviour
             {
                 for (int y = 0; y < size; y++)
                 {
-                    Instantiate(quad, wallroot.position + new Vector3(x * quadsize, y * quadsize) - new Vector3(offset * 0.5f - quadsize / 2, offset * 0.5f - quadsize / 2), quaternion.identity, wallroot);
+                    Instantiate(quad, wallroot.position + new Vector3(x * quadsize, y * quadsize) - new Vector3(offset * 0.5f - quadsize / 2, offset * 0.5f - quadsize / 2), quaternion.Euler(offsetrot), wallroot);
 
                 }
             }
@@ -69,7 +71,7 @@ public class RoomGenerator : MonoBehaviour
         {
             for (int y = 0; y < size; y++)
             {
-                Instantiate(quad, wallroot.position + new Vector3(x * quadsize, y * quadsize) - new Vector3(offset * 0.5f - quadsize / 2, offset * 0.5f - quadsize / 2), quaternion.identity, wallroot);
+                Instantiate(quad, wallroot.position + new Vector3(x * quadsize, y * quadsize) - new Vector3(offset * 0.5f - quadsize / 2, offset * 0.5f - quadsize / 2), quaternion.Euler(offsetrot), wallroot);
 
             }
         }

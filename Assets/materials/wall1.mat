@@ -29,7 +29,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D:
-        m_Texture: {fileID: 2800000, guid: c6c33170d4914cf4b8ee5402b13e6ae8, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1bbbca099c35e8e48abe1461be9befb8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _txt2:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -48,9 +52,15 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _cahnce: 35.7
+    - _intensity: 0.1
+    - _size: 0.1
     m_Colors:
     - _bricks: {r: 0.6886792, g: 0.19166067, b: 0.19166067, a: 0}
+    - _c1: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 0}
+    - _c2: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 0}
     - _mortar: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 0}
+    - _mortarcolor: {r: 0.3207547, g: 0.3207547, b: 0.3207547, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &4694111999749405794
 MonoBehaviour:

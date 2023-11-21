@@ -48,7 +48,8 @@ MonoBehaviour:
   size: 8
   quadsize: 4
   quad: {fileID: 0}
-  generate: 1
+  generate: 0
+  offsetrot: {x: 0, y: 0, z: 0}
 --- !u!65 &-1602111308130334652
 BoxCollider:
   m_ObjectHideFlags: 0
