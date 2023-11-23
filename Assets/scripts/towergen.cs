@@ -18,6 +18,7 @@ public class towergen : MonoBehaviour
     public float sidewaysChance = 50;
     private Vector3Int lastdir = -directions[0];
     private roomdata lastroom = new roomdata(new Vector3Int(0, 0, 0));
+    public roompack roompack;
     public bool delete=false;
     public int roomstoplace;
     public bool regenerate;
@@ -128,6 +129,22 @@ public class towergen : MonoBehaviour
                         room.Generated = true;
                     }
                 }
+            }
+        }
+    }
+    public void placemainfeatures(roomdata room,Vector3 center) 
+    {
+        if (!(room.room == new Vector3Int(0,0,0)))
+        {
+            if (room.nextroom-room.room==Vector3Int.up)
+            {
+                GameObject toplace = roompack.vrooms[Random.Range((int)0, roompack.vrooms.Length)];
+                toplace.transform.position = center;
+            }
+            else if ((room.lastroom - room.room).z == 0)
+            {
+                GameObject toplace = roompack.vrooms[Random.Range((int)0, roompack.vrooms.Length)];
+                toplace.transform.position = center;
             }
         }
     }
