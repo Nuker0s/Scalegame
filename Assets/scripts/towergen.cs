@@ -112,7 +112,7 @@ public class towergen : MonoBehaviour
                                 Destroy(romgen.transform.GetChild(i).gameObject);
                             }
                         }
-                        placemainfeatures(room, romgen.transform.position);
+                        placemainfeatures(room, romgen.transform);
                         room.Generated = true;
 
                     }
@@ -128,25 +128,29 @@ public class towergen : MonoBehaviour
 
                         romgen.transform.rotation = Quaternion.Euler(Quaternion.LookRotation(room.nextroom - room.room).eulerAngles - new Vector3(90, 0, 0));
                         room.Generated = true;
-                        placemainfeatures(room, romgen.transform.position);
+                        placemainfeatures(room, romgen.transform);
                     }
                 }
             }
         }
     }
-    public void placemainfeatures(roomdata room,Vector3 center) 
+    public void placemainfeatures(roomdata room,Transform roomgen) 
     {
         if (!(room.lastroom == new Vector3Int(0,0,0)))
         {
-            if (room.nextroom-room.room==Vector3Int.up)
+
+            if (room.room-room.nextroom== Vector3Int.up)
             {
                 GameObject toplace = roompack.vrooms[Random.Range((int)0, roompack.vrooms.Length)];
-                toplace.transform.position = center;
+                Instantiate(toplace, roomgen.position, Quaternion.identity,roomgen);
+                //toplace.transform.position = center;
             }
-            else if ((room.lastroom - room.room).z == 0)
+            else if ((room.room - room.lastroom).z == 0)
             {
                 GameObject toplace = roompack.vrooms[Random.Range((int)0, roompack.vrooms.Length)];
-                toplace.transform.position = center;
+                Instantiate(toplace, roomgen.position, Quaternion.identity,roomgen);
+
+                //toplace.transform.position = center;
             }
         }
     }
