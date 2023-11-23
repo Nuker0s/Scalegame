@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b24b3b883761e564593a045761bc6a17, type: 3}
+  m_Name: firstage
+  m_EditorClassIdentifier: 
+  hrooms:
+  - {fileID: 437211829895614329, guid: 01cddc606193d15498723a66f7855a1c, type: 3}
+  - {fileID: 2907407529871306894, guid: 25949d969f51bbe4a9b8d8dbda4982dd, type: 3}
+  - {fileID: 6683250693127256598, guid: 76e65923a78ebbc49a0eacad200e8e1d, type: 3}
+  vrooms:
+  - {fileID: 7712412352286197031, guid: fc38649ed18957c4fbde09cdb343df06, type: 3}
+  - {fileID: 4217232267000352633, guid: 75d84c0f743bdab41bc5632ca3075d75, type: 3}

@@ -112,6 +112,7 @@ public class towergen : MonoBehaviour
                                 Destroy(romgen.transform.GetChild(i).gameObject);
                             }
                         }
+                        placemainfeatures(room, romgen.transform.position);
                         room.Generated = true;
 
                     }
@@ -127,6 +128,7 @@ public class towergen : MonoBehaviour
 
                         romgen.transform.rotation = Quaternion.Euler(Quaternion.LookRotation(room.nextroom - room.room).eulerAngles - new Vector3(90, 0, 0));
                         room.Generated = true;
+                        placemainfeatures(room, romgen.transform.position);
                     }
                 }
             }
@@ -134,7 +136,7 @@ public class towergen : MonoBehaviour
     }
     public void placemainfeatures(roomdata room,Vector3 center) 
     {
-        if (!(room.room == new Vector3Int(0,0,0)))
+        if (!(room.lastroom == new Vector3Int(0,0,0)))
         {
             if (room.nextroom-room.room==Vector3Int.up)
             {
