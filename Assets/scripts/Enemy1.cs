@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -36,9 +37,14 @@ public class Enemy1 : MonoBehaviour
             agent.enabled = true;
             agent.destination = Player.position;
 
-            if (Vector3.Distance(transform.position,Player.position)<=attackdistance)
+            if (Vector3.Distance(transform.position, Player.position) <= attackdistance && math.abs(Vector3.Dot(transform.forward,(Player.position-transform.position).normalized)) > 0.6)
             {
                 anim.button = true;
+                agent.isStopped = true;
+            }
+            else
+            {
+                agent.isStopped = false;
             }
 
         }

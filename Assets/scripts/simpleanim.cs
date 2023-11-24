@@ -28,7 +28,7 @@ public class simpleanim : MonoBehaviour
         if (button)
         {
             button = false;
-            StartAnimation();
+            StartAnimation(false);
         }
         if (isAnimating)
         {
@@ -43,14 +43,16 @@ public class simpleanim : MonoBehaviour
             if (currentTime >= 1f)
             {
                 isAnimating = false;
-                SwapTargets();
+                //SwapTargets();
                 if (targetTransform==target)
                 {
-                    
+                    StartAnimation(true);
                 }
                 else
                 {
-                    StartAnimation();
+                    
+                    
+                    
                 }
                 
             }
@@ -58,12 +60,15 @@ public class simpleanim : MonoBehaviour
     }
 
     // Trigger the animation to start from the initial position
-    public void StartAnimation()
+    public void StartAnimation(bool targetswap)
     {
         if (!isAnimating)
         {
+            
+            SwapTargets();
             isAnimating = true;
             currentTime = 0f;
+            
         }
     }
 
@@ -72,22 +77,24 @@ public class simpleanim : MonoBehaviour
     {
         if (targetTransform==transform)
         {
-            targetTransform = target;
+            
             initialPosition = transform.position;
 
             
             
             initialRotation = transform.rotation;
-            
+            targetTransform = target;
+
         }
         else
         {
             
             initialPosition = targetTransform.position;
 
+            initialRotation = targetTransform.rotation;
             targetTransform = transform;
            
-            initialRotation = targetTransform.rotation;
+            
             
         }
 
