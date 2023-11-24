@@ -23,10 +23,10 @@ public class breakable : MonoBehaviour
         if (breaker)
         {
             breaker = false;
-            breaking();
+            breaking(transform.position,5,2);
         }
     }
-    public void breaking() 
+    public void breaking(Vector3 from,float force,float radius) 
     {
         foreach (Transform cellparent in cellparents)
         {
@@ -37,7 +37,8 @@ public class breakable : MonoBehaviour
                 //cellchild.parent = cellstorage.transform;
                 Rigidbody cell = cellchild.GetComponent<Rigidbody>();
                 cell.isKinematic = false;
-                cell.AddForce(Random.Range(0, maxforce), Random.Range(0, maxforce), Random.Range(0, maxforce));
+                cell.AddExplosionForce(force, from, radius);
+                //cell.AddForce(Random.Range(0, maxforce), Random.Range(0, maxforce), Random.Range(0, maxforce));
                 
                 
             }
