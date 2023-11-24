@@ -8,4 +8,5 @@ public class roompack : ScriptableObject
 
     public GameObject[] hrooms;
     public GameObject[] vrooms;
+    public GameObject[] dhrooms;
 }

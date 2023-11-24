@@ -139,18 +139,20 @@ public class towergen : MonoBehaviour
         if (!(room.lastroom == new Vector3Int(0,0,0)))
         {
 
-            if (room.room-room.nextroom== Vector3Int.up)
+            if ((room.room - room.lastroom).y == 0 && (room.nextroom - room.room)!= Vector3Int.up)
             {
-                GameObject toplace = roompack.vrooms[Random.Range((int)0, roompack.vrooms.Length)];
-                Instantiate(toplace, roomgen.position, Quaternion.identity,roomgen);
-                //toplace.transform.position = center;
-            }
-            else if ((room.room - room.lastroom).z == 0)
-            {
-                GameObject toplace = roompack.vrooms[Random.Range((int)0, roompack.vrooms.Length)];
-                Instantiate(toplace, roomgen.position, Quaternion.identity,roomgen);
 
-                //toplace.transform.position = center;
+                GameObject toplace = roompack.hrooms[Random.Range((int)0, roompack.hrooms.Length)];
+                Instantiate(toplace, roomgen.position, Quaternion.identity, roomgen);
+
+            }
+            else if ((room.lastroom - room.room).y == 0)
+            {
+
+
+                GameObject toplace = roompack.vrooms[Random.Range((int)0, roompack.vrooms.Length)];
+                Instantiate(toplace, roomgen.position, Quaternion.identity,roomgen);
+                
             }
         }
     }
