@@ -29,6 +29,8 @@ public class banonprojectile : MonoBehaviour
         onhit.transform.parent = null;
         trail.transform.parent = null;
         onhit.Play();
+        trail.Stop();
+        //trail.SendEvent("stop");
         Destroy(onhit.gameObject,10);
         Destroy(trail.gameObject,10);
         Destroy(gameObject);

@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3835856244830760588}
-  speed: 15
+  speed: 25
   damage: 10
   knockback: 10
   range: 3
@@ -383,13 +383,13 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 4
+      - m_Value: 8
         m_Name: force
         m_Overridden: 1
-      - m_Value: 5
+      - m_Value: 3
         m_Name: sizemult
         m_Overridden: 1
-      - m_Value: 1
+      - m_Value: 0.2
         m_Name: fragmentsizemult
         m_Overridden: 1
       - m_Value: 20

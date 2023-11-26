@@ -143,7 +143,7 @@ public class towergen : MonoBehaviour
             {
 
                 GameObject toplace = roompack.hrooms[Random.Range((int)0, roompack.hrooms.Length)];
-                Instantiate(toplace, roomgen.position, Quaternion.identity, roomgen);
+                Instantiate(toplace, roomgen.position, Quaternion.LookRotation(room.nextroom - room.room), roomgen);
 
             }
             else if ((room.lastroom - room.room).y == 0)
