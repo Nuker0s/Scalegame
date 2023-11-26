@@ -25,7 +25,11 @@ public class banonprojectile : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log(collision.collider.gameObject.name);
-        
+        RaycastHit[] hits = Physics.SphereCastAll(collision.GetContact(0).point, range, Vector3.down);
+        foreach (RaycastHit hit in hits) 
+        {
+            hit.collider.gameObject.SendMessage("Recivedamage",1);
+        }
         onhit.transform.parent = null;
         trail.transform.parent = null;
         onhit.Play();

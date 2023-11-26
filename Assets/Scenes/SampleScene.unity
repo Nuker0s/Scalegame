@@ -115045,11 +115045,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 526214107467572256, guid: 3b985ed53b720f2468e4d5b6a46ebc9b,
-        type: 3}
-      propertyPath: m_InitialEventNameOverriden
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 898155349492334541, guid: 3b985ed53b720f2468e4d5b6a46ebc9b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -115104,11 +115099,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: banonprojectile
-      objectReference: {fileID: 0}
-    - target: {fileID: 9015372172288864575, guid: 3b985ed53b720f2468e4d5b6a46ebc9b,
-        type: 3}
-      propertyPath: m_InitialEventNameOverriden
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
