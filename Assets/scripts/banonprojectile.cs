@@ -50,10 +50,10 @@ public class banonprojectile : MonoBehaviour
     {
         if (target.TryGetComponent(out Enemy1 enemy))
         {
-            enemy.stuntimer += 0.1f;
+            enemy.stuntimer += stun;
+
+            enemy.Recivedamage(damage, transform.position, knockback / 4, range);
             
-            
-            enemy.Recivedamage(damage, transform.position, knockback/4, range);
             
         }
         else if (target.TryGetComponent(out Rigidbody trb))

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b24b3b883761e564593a045761bc6a17, type: 3}
+  m_Name: FirstStage16x16
+  m_EditorClassIdentifier: 
+  hrooms:
+  - {fileID: 5223582407028190638, guid: fc8cf9492bb0a4b40b28cf1045442a55, type: 3}
+  - {fileID: 905815581064385608, guid: 183b67df1d4ff9d47b87ca9082b47cbc, type: 3}
+  - {fileID: 8713408581154089671, guid: 385ab46c8a2bcb348b459d4b336c6637, type: 3}
+  - {fileID: 4977185631785095362, guid: 75ff3d3c620ffc241b519d2eda7c59c1, type: 3}
+  - {fileID: 8287409196092825769, guid: 4bf37d1d834e30b45b4eb7283a89a324, type: 3}
+  - {fileID: 576947486191305446, guid: eba6d37b053918a4b95be9cd56099186, type: 3}
+  vrooms:
+  - {fileID: 7270933062922059059, guid: e17e18fce4191224381c38e17ecc8a9d, type: 3}
+  dhrooms:
+  - {fileID: 8836028496689280093, guid: 46f0ce9b683200243830f21690395689, type: 3}

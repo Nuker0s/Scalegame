@@ -20,9 +20,6 @@ public class Enemy1 : MonoBehaviour
     public Rigidbody rb;
     public bool isterrain = true;
     public float stuntimer;
-    public Transform debugdamager;
-    public Vector3 debugdamagestats;
-    public bool applydebugdamage;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +27,10 @@ public class Enemy1 : MonoBehaviour
         if (isterrain)
         {
             Destroy(agent);
+        }
+        if (breakable==null)
+        {
+            TryGetComponent(out breakable);
         }
     }
 
@@ -41,24 +42,24 @@ public class Enemy1 : MonoBehaviour
             movement();
         }
         
-        /*if (applydebugdamage)
-        {
-            applydebugdamage = false;
-            Recivedamage(debugdamagestats.x, debugdamager.position, debugdamagestats.y, debugdamagestats.z);
-        }*/
+
     }
-    public void Recivedamage(float damage, Vector3 from, float force,float range) 
+    public void Recivedamage(float damage, Vector3 from, float force, float range)
     {
         health -= damage;
-        
+
         if (health <= 0)
         {
             breakable.breaking(from, force, range);
         }
-        
-        rb.AddForce((transform.position - from).normalized * force);
+        //wait
+        if (!isterrain)
+        {
+            rb.AddForce((transform.position - from).normalized * force);
+        }
         
     }
+
     public void movement()
     {
         //Debug.Log(agent.isOnNavMesh);
