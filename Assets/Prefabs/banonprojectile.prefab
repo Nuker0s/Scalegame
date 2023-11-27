@@ -325,9 +325,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3835856244830760588}
+  stun: 1
   speed: 25
-  damage: 10
-  knockback: 10
+  damage: 120
+  knockback: 500
   range: 3
   explosive: 1
   onhit: {fileID: 526214107467572256}

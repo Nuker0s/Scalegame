@@ -114035,7 +114035,6 @@ GameObject:
   - component: {fileID: 1419461164768135026}
   - component: {fileID: 3436878497818332111}
   - component: {fileID: 1138871254307229756}
-  - component: {fileID: 3436878497818332112}
   m_Layer: 0
   m_Name: head
   m_TagString: Untagged
@@ -114830,28 +114829,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 533160740806548665}
   m_Mesh: {fileID: -7070831255929112694, guid: 83fdabdbb101e7743af8a25f8a2515c0, type: 3}
---- !u!64 &3436878497818332112
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 533160740806548665}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -7070831255929112694, guid: 83fdabdbb101e7743af8a25f8a2515c0, type: 3}
 --- !u!1 &3592415691048971107
 GameObject:
   m_ObjectHideFlags: 0
@@ -115045,6 +115022,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4280790907243644385, guid: 3b985ed53b720f2468e4d5b6a46ebc9b,
+        type: 3}
+      propertyPath: damage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -4280790907243644385, guid: 3b985ed53b720f2468e4d5b6a46ebc9b,
+        type: 3}
+      propertyPath: knockback
+      value: 1600
+      objectReference: {fileID: 0}
     - target: {fileID: 898155349492334541, guid: 3b985ed53b720f2468e4d5b6a46ebc9b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -115871,6 +115858,7 @@ GameObject:
   - component: {fileID: 6758455537415196504}
   - component: {fileID: 6758455537415196503}
   - component: {fileID: 6758455537415196502}
+  - component: {fileID: 6758455537415196505}
   m_Layer: 0
   m_Name: crystaldude1
   m_TagString: Untagged
@@ -116077,6 +116065,7 @@ MonoBehaviour:
   visiondistance: 15
   attackdistance: 2
   rb: {fileID: 6758455537415196502}
+  isterrain: 0
   stuntimer: 0
   debugdamager: {fileID: 18535581}
   debugdamagestats: {x: 10, y: 50, z: 3}
@@ -116103,6 +116092,29 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &6758455537415196505
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6233275644933297646}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.24
+  m_Height: 4.6
+  m_Direction: 1
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!4 &6812728119504494185
 Transform:
   m_ObjectHideFlags: 0
@@ -116180,7 +116192,6 @@ GameObject:
   - component: {fileID: 8424112388554640768}
   - component: {fileID: 7026212754469541209}
   - component: {fileID: 3387841954030883331}
-  - component: {fileID: 8424112388554640769}
   m_Layer: 0
   m_Name: body
   m_TagString: Untagged
@@ -116419,28 +116430,6 @@ Transform:
   - {fileID: 1064579260}
   m_Father: {fileID: 6758455537415196500}
   m_LocalEulerAnglesHint: {x: -90, y: -180, z: 0}
---- !u!64 &8424112388554640769
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7448618535900136317}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -8545447256379345787, guid: 83fdabdbb101e7743af8a25f8a2515c0, type: 3}
 --- !u!23 &8880804111011214984
 MeshRenderer:
   m_ObjectHideFlags: 0

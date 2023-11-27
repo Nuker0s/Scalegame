@@ -7,6 +7,7 @@ using UnityEngine.VFX;
 public class banonprojectile : MonoBehaviour
 {
     public Rigidbody rb;
+    public float stun;
     public float speed;
     public float damage;
     public float knockback;
@@ -25,10 +26,15 @@ public class banonprojectile : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log(collision.collider.gameObject.name);
-        RaycastHit[] hits = Physics.SphereCastAll(collision.GetContact(0).point, range, Vector3.down);
-        foreach (RaycastHit hit in hits) 
+        if (explosive)
         {
-            hit.collider.gameObject.SendMessage("Recivedamage",1);
+            RaycastHit[] hits = Physics.SphereCastAll(collision.GetContact(0).point, range, Vector3.down);
+            foreach (RaycastHit hit in hits)
+            {
+                Debug.Log(hit.collider.gameObject.name);
+                StartCoroutine( Dealer(hit.collider.transform.gameObject));
+
+            }
         }
         onhit.transform.parent = null;
         trail.transform.parent = null;
@@ -40,5 +46,23 @@ public class banonprojectile : MonoBehaviour
         Destroy(gameObject);
 
     }
+    public IEnumerator Dealer(GameObject target)
+    {
+        if (target.TryGetComponent(out Enemy1 enemy))
+        {
+            enemy.stuntimer += 0.1f;
+            
+            
+            enemy.Recivedamage(damage, transform.position, knockback/4, range);
+            
+        }
+        else if (target.TryGetComponent(out Rigidbody trb))
+        {
+            
+            trb.AddExplosionForce(knockback, transform.position, range);
+        }
+        yield break;
+    }
+
 
 }
