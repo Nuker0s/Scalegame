@@ -31,11 +31,13 @@ public class breakable : MonoBehaviour
         foreach (Transform cellparent in cellparents)
         {
             cellparent.gameObject.SetActive(true);
+            Debug.Log("activated");
             cellparent.parent = null;
             foreach (Transform cellchild in cellparent) 
             {
                 //cellchild.parent = cellstorage.transform;
                 Rigidbody cell = cellchild.GetComponent<Rigidbody>();
+                
                 cell.isKinematic = false;
                 cell.AddExplosionForce(force, from, radius);
                 //cell.AddForce(Random.Range(0, maxforce), Random.Range(0, maxforce), Random.Range(0, maxforce));
@@ -47,9 +49,9 @@ public class breakable : MonoBehaviour
         foreach(Transform todeatach in deatach) 
         {
             todeatach.parent = null;
-            if (todeatach.gameObject.GetComponent<Rigidbody>() != null) 
+            if (todeatach.gameObject.TryGetComponent(out Rigidbody drb)) 
             {
-                todeatach.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                drb.isKinematic = false;
             }
         }
         foreach (GameObject item in vanish) 
