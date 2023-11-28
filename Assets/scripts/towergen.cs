@@ -154,6 +154,11 @@ public class towergen : MonoBehaviour
                 Instantiate(toplace, roomgen.position, Quaternion.identity,roomgen);
                 
             }
+            else if (true)
+            {
+                GameObject toplace = roompack.deepvrooms[Random.Range((int)0, roompack.deepvrooms.Length)];
+                Instantiate(toplace, roomgen.position, Quaternion.identity, roomgen);
+            }
         }
     }
     public void deleteroom() 
