@@ -36,6 +36,10 @@ public class banonprojectile : MonoBehaviour
 
             }
         }
+        else
+        {
+            StartCoroutine(Dealer(collision.collider.transform.gameObject));
+        }
         onhit.transform.parent = null;
         trail.transform.parent = null;
         onhit.Play();
@@ -51,7 +55,7 @@ public class banonprojectile : MonoBehaviour
         if (target.TryGetComponent(out Enemy1 enemy))
         {
             enemy.stuntimer += stun;
-
+            yield return new WaitForFixedUpdate();
             enemy.Recivedamage(damage, transform.position, knockback / 4, range);
             
             

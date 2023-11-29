@@ -15,11 +15,13 @@ public class Enemy1 : MonoBehaviour
     public breakable breakable;
     public NavMeshAgent agent;
     public Transform Player;
+    public Vector3 PlayerPos;
     public float visiondistance;
     public float attackdistance;
     public Rigidbody rb;
     public bool isterrain = true;
     public float stuntimer;
+    public float rottimer;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,9 +50,10 @@ public class Enemy1 : MonoBehaviour
     {
         health -= damage;
 
+        
         if (health <= 0)
         {
-            breakable.breaking(from, force, range);
+            breakable.breaking(from, force / 8, range);
         }
         //wait
         if (!isterrain)
@@ -68,13 +71,18 @@ public class Enemy1 : MonoBehaviour
         {
             rb.isKinematic = true;
             agent.enabled = true;
+            if (PlayerPos != Player.position)
+            {
+                agent.destination = Player.position;
+                PlayerPos = Player.position;
+            }
+            
 
-            agent.destination = Player.position;
-
-            if (Vector3.Distance(transform.position, Player.position) <= attackdistance && math.abs(Vector3.Dot(transform.forward, (Player.position - transform.position).normalized)) > 0.6)
+            if (Vector3.Distance(transform.position, Player.position) <= attackdistance)
             {
                 anim.button = true;
                 agent.isStopped = true;
+                transform.rotation = math.slerp(transform.rotation,quaternion.LookRotation(Player.position - transform.position, Vector3.up),rottimer);
             }
             else
             {
@@ -104,6 +112,8 @@ public class Enemy1 : MonoBehaviour
                     {
                         agent.enabled = true;
                         rb.isKinematic = true;
+                        agent.destination = Player.position;
+                        PlayerPos = Player.position;
                     }
 
                 }

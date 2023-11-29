@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 public class playermovement : MonoBehaviour
@@ -30,6 +31,7 @@ public class playermovement : MonoBehaviour
     public LayerMask ground;
     public float groundcheckrange;
     public bool grounded = true;
+    public Vector2 camclamp;
 
     void Awake()
     {
@@ -132,12 +134,23 @@ public class playermovement : MonoBehaviour
         
     }
 
+    private float totalRotation = 0.0f;
+
     public void lookero()
     {
         Vector2 limput = look.ReadValue<Vector2>() * sense * Time.deltaTime;
         transform.Rotate(0, limput.x, 0);
-        cam.transform.Rotate(limput.y*-1, 0, 0);
+
+        // Add the input to the total rotation
+        totalRotation += limput.y * -1;
+
+        // Clamp the total rotation to be within a certain range
+        totalRotation = Mathf.Clamp(totalRotation, -80, 80);
+
+        // Apply the rotation to the camera
+        cam.transform.localEulerAngles = new Vector3(totalRotation, 0, 0);
     }
+
     public void jumperro()
     {
         if (jumpsched)

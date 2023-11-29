@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2801933281418574329}
   - component: {fileID: 9015372172288864575}
   - component: {fileID: 1356923921669550860}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: banontraild
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 26342588081581248}
   - component: {fileID: 3835856244830760588}
   - component: {fileID: -4280790907243644385}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: banonprojectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 5845181622400363590}
   - component: {fileID: 526214107467572256}
   - component: {fileID: 8383314927855248594}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: onhit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
