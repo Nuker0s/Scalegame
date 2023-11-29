@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 public class grapple : MonoBehaviour
 {
     public PlayerInput pinput;
-    public InputAction fire;
+    public InputAction shift;
     public Camera cam;
     public bool fired = false;
     public bool catched = false;
@@ -22,7 +22,7 @@ public class grapple : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
-        fire = pinput.actions.FindAction("Fire");
+        shift = pinput.actions.FindAction("Shift");
     }
     
     // Update is called once per frame
@@ -44,7 +44,7 @@ public class grapple : MonoBehaviour
             
             Debug.Log("grabb");
         }
-        if (fire.WasPressedThisFrame() /*& !cam3d.pause&*/)
+        if (shift.WasPressedThisFrame() /*& !cam3d.pause&*/)
         {
             if (!fired)
             {

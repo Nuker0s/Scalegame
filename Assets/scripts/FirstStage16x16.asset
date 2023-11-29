@@ -21,5 +21,6 @@ MonoBehaviour:
   - {fileID: 576947486191305446, guid: eba6d37b053918a4b95be9cd56099186, type: 3}
   vrooms:
   - {fileID: 7270933062922059059, guid: e17e18fce4191224381c38e17ecc8a9d, type: 3}
-  dhrooms:
-  - {fileID: 8836028496689280093, guid: 46f0ce9b683200243830f21690395689, type: 3}
+  deephrooms: []
+  deepvrooms:
+  - {fileID: 1810790196988138361, guid: 06642994cf97c2a4e921afda0c9625ab, type: 3}
