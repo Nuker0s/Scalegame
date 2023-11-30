@@ -328,11 +328,12 @@ MonoBehaviour:
   stun: 1
   speed: 25
   damage: 120
-  knockback: 500
+  knockback: 800
   range: 3
   explosive: 1
   onhit: {fileID: 526214107467572256}
   trail: {fileID: 9015372172288864575}
+  explosionsound: {fileID: 8300000, guid: cb75af5b05c3d7540bbf52ec8d967df6, type: 3}
 --- !u!1 &4042734108960137930
 GameObject:
   m_ObjectHideFlags: 0

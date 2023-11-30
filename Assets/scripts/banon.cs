@@ -7,6 +7,7 @@ public class cannon : MonoBehaviour
     public InputAction special;
     public float cooldown;
     public float timer;
+    public AudioClip fire;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +30,10 @@ public class cannon : MonoBehaviour
     }
     public void Fireprojectile() 
     {
-
+        if (fire!=null)
+        {
+            onesound.playsound(transform.position, fire, globalvariables.sfxvolume);
+        }
             timer = cooldown;
             Instantiate(projectile,transform.position,transform.rotation);
         

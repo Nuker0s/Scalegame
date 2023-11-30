@@ -15,6 +15,7 @@ public class banonprojectile : MonoBehaviour
     public bool explosive;
     public VisualEffect onhit;
     public VisualEffect trail;
+    public AudioClip explosionsound;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -25,7 +26,8 @@ public class banonprojectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.collider.gameObject.name);
+        //Debug.Log(collision.collider.gameObject.name);
+        onesound.playsound(transform.position, explosionsound, globalvariables.sfxvolume);
         if (explosive)
         {
             RaycastHit[] hits = Physics.SphereCastAll(collision.GetContact(0).point, range, Vector3.down);
@@ -56,7 +58,7 @@ public class banonprojectile : MonoBehaviour
         {
             enemy.stuntimer += stun;
             yield return new WaitForFixedUpdate();
-            enemy.Recivedamage(damage, transform.position, knockback / 4, range);
+            enemy.Recivedamage(damage, transform.position, knockback, range);
             
             
         }

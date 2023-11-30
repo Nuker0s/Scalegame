@@ -21,6 +21,7 @@ public class sword1 : MonoBehaviour
     public PlayerInput pinput;
     public InputAction fire;
     public VisualEffect trail;
+    public AudioClip swingsound;
     // Start is called before the first frame update
     void Start()
     {
@@ -59,7 +60,7 @@ public class sword1 : MonoBehaviour
         trail.SetVector3("start", startpos);
         trail.SetVector3 ("end", swordtip.localPosition);
         trail.Play();
-
+        onesound.playsound(swordtip.position, swingsound, globalvariables.sfxvolume);
         isCooldown = true;
         /*
         while (elapsedTime < journeyTime)

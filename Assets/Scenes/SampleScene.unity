@@ -103314,6 +103314,7 @@ MonoBehaviour:
     m_Flags: 0
   cooldown: 2
   timer: 0
+  fire: {fileID: 8300000, guid: 7747c5d772e2da644a7e445fb493b6c5, type: 3}
 --- !u!1 &1948604595
 GameObject:
   m_ObjectHideFlags: 0
@@ -104441,6 +104442,7 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   trail: {fileID: 1565757149}
+  swingsound: {fileID: 8300000, guid: 38c13a016bd2e204a80a198b072f9b71, type: 3}
 --- !u!1 &1979240066
 GameObject:
   m_ObjectHideFlags: 0
@@ -114396,7 +114398,7 @@ PrefabInstance:
     - target: {fileID: 2901999077826037216, guid: e7b1606b59bc30f4c94ccb63999ea015,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3767294484630890291, guid: e7b1606b59bc30f4c94ccb63999ea015,
         type: 3}
