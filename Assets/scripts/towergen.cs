@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
-
+using UnityEngine.AI;
 
 public class towergen : MonoBehaviour
 {
@@ -16,9 +17,11 @@ public class towergen : MonoBehaviour
     private Vector3Int lastdir = -directions[0];
     private roomdata lastroom = new roomdata(new Vector3Int(0, 0, 0));
     public roompack roompack;
-    public bool delete=false;
+    public bool delete = false;
     public int roomstoplace;
     public bool regenerate;
+    public GameObject lvl0;
+    public GameObject lastgenlevel;
     void Start()
     {
         if (roomgenopt == null)
@@ -31,6 +34,9 @@ public class towergen : MonoBehaviour
             
         }
         generaterooms();
+        Instantiate(lvl0,transform.GetChild(0).position,Quaternion.identity, transform);
+        player.position=transform.GetChild(0).position+Vector3.up*3;
+        
 
     }
     private void Update()
@@ -52,7 +58,7 @@ public class towergen : MonoBehaviour
             
         }
 
-        for (int i = 0; i < curroom.GetSiblingIndex() - 2; i++)
+        for (int i = 0; i < curroom.GetSiblingIndex() - 3; i++)
         {
             roomplacer(1, sidewaysChance);
             generaterooms();
@@ -133,6 +139,7 @@ public class towergen : MonoBehaviour
     }
     public void placemainfeatures(roomdata room,Transform roomgen) 
     {
+        GameObject currentlevel = new GameObject();
         if (!(room.lastroom == new Vector3Int(0,0,0)))
         {
 
@@ -140,7 +147,7 @@ public class towergen : MonoBehaviour
             {
 
                 GameObject toplace = roompack.hrooms[Random.Range((int)0, roompack.hrooms.Length)];
-                Instantiate(toplace, roomgen.position, Quaternion.LookRotation(room.nextroom - room.room), roomgen);
+                currentlevel = Instantiate(toplace, roomgen.position, Quaternion.LookRotation(room.nextroom - room.room), roomgen);
 
             }
             else if ((room.lastroom - room.room).y == 0)
@@ -148,14 +155,43 @@ public class towergen : MonoBehaviour
 
 
                 GameObject toplace = roompack.vrooms[Random.Range((int)0, roompack.vrooms.Length)];
-                Instantiate(toplace, roomgen.position, Quaternion.identity,roomgen);
+                currentlevel = Instantiate(toplace, roomgen.position, Quaternion.identity,roomgen);
                 
             }
             else if (true)
             {
                 GameObject toplace = roompack.deepvrooms[Random.Range((int)0, roompack.deepvrooms.Length)];
-                Instantiate(toplace, roomgen.position, Quaternion.identity, roomgen);
+                currentlevel = Instantiate(toplace, roomgen.position, Quaternion.identity, roomgen);
             }
+        }
+        if (lastgenlevel != null)
+        {
+            if ((currentlevel.transform.position-lastgenlevel.transform.position).y == 0)
+            {
+                OffMeshLink link = currentlevel.AddComponent<OffMeshLink>();
+                
+                link.startTransform = lastgenlevel.transform;
+                link.endTransform = currentlevel.transform;
+                
+                link.biDirectional = true;
+                link.UpdatePositions();
+                link.autoUpdatePositions = true;
+
+                OffMeshLink link2 = lastgenlevel.AddComponent<OffMeshLink>();
+
+                link2.startTransform = currentlevel.transform;
+                link2.endTransform = lastgenlevel.transform;
+
+                link2.biDirectional = true;
+                link2.UpdatePositions();
+                link2.autoUpdatePositions = true;
+                
+                lastgenlevel = currentlevel;
+            }
+        }
+        else
+        {
+            lastgenlevel = currentlevel;
         }
     }
     public void deleteroom() 

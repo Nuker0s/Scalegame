@@ -392,7 +392,7 @@ MonoBehaviour:
   agent: {fileID: 7654077045375381751}
   Player: {fileID: 0}
   PlayerPos: {x: 0, y: 0, z: 0}
-  visiondistance: 15
+  visiondistance: 16
   attackdistance: 3
   rb: {fileID: 8521256608578700811}
   isterrain: 0

@@ -41,7 +41,16 @@ public class Enemy1 : MonoBehaviour
     {
         if (!isterrain)
         {
-            movement();
+            try
+            {
+                movement();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
         
 
@@ -67,7 +76,7 @@ public class Enemy1 : MonoBehaviour
     {
         //Debug.Log(agent.isOnNavMesh);
 
-        if ((agent.isOnNavMesh || agent.isOnOffMeshLink) && stuntimer <= 0)
+        if ((agent.isOnNavMesh || agent.isOnOffMeshLink) && stuntimer <= 0 && Vector3.Distance(transform.position, Player.position) <= visiondistance)
         {
             rb.isKinematic = true;
             agent.enabled = true;
@@ -102,7 +111,6 @@ public class Enemy1 : MonoBehaviour
             {
                 try
                 {
-
                     if (rb.velocity.magnitude > 0.5f)
                     {
                         agent.enabled = false;
@@ -115,12 +123,13 @@ public class Enemy1 : MonoBehaviour
                         agent.destination = Player.position;
                         PlayerPos = Player.position;
                     }
-
                 }
                 catch (Exception)
                 {
+
                     throw;
                 }
+
 
 
 
