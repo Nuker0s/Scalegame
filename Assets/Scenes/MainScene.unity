@@ -156,6 +156,11 @@ PrefabInstance:
       propertyPath: roomgenprefab
       value: 
       objectReference: {fileID: 1176971006}
+    - target: {fileID: 6357231789537672823, guid: 91a23c4ba314f4b49984ff38e52170b2,
+        type: 3}
+      propertyPath: holelayer.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 6802875530883820261, guid: 91a23c4ba314f4b49984ff38e52170b2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -315,6 +320,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: player
       objectReference: {fileID: 0}
+    - target: {fileID: 4171042036725534877, guid: f81719956a04efd47b2674bf45f2eaca,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5992907055918182183, guid: f81719956a04efd47b2674bf45f2eaca,
+        type: 3}
+      propertyPath: ground.m_Bits
+      value: 257
+      objectReference: {fileID: 0}
     - target: {fileID: 9022740760446932968, guid: f81719956a04efd47b2674bf45f2eaca,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -468,7 +483,7 @@ GameObject:
   - component: {fileID: 2103430125}
   - component: {fileID: 2103430124}
   - component: {fileID: 2103430123}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}

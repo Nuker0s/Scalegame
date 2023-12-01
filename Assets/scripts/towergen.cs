@@ -1,7 +1,10 @@
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
+
+
 
 public class towergen : MonoBehaviour
 {
@@ -22,8 +25,11 @@ public class towergen : MonoBehaviour
     public bool regenerate;
     public GameObject lvl0;
     public GameObject lastgenlevel;
+    public LayerMask holelayer;
+
     void Start()
     {
+
         if (roomgenopt == null)
         {
             roomgenopt = roomgenprefab.GetComponent<RoomGenerator>();
@@ -115,6 +121,7 @@ public class towergen : MonoBehaviour
                                 Destroy(romgen.transform.GetChild(i).gameObject);
                             }
                         }
+                        randomholegen(romgen.transform.position, 8);
                         placemainfeatures(room, romgen.transform);
                         room.Generated = true;
 
@@ -130,8 +137,10 @@ public class towergen : MonoBehaviour
                         //Debug.Log(room.nextroom - room.room);
 
                         romgen.transform.rotation = Quaternion.Euler(Quaternion.LookRotation(room.nextroom - room.room).eulerAngles - new Vector3(90, 0, 0));
-                        room.Generated = true;
+                        randomholegen(romgen.transform.position, 8);
+                        
                         placemainfeatures(room, romgen.transform);
+                        room.Generated = true;
                     }
                 }
             }
@@ -139,7 +148,7 @@ public class towergen : MonoBehaviour
     }
     public void placemainfeatures(roomdata room,Transform roomgen) 
     {
-        GameObject currentlevel = new GameObject();
+        GameObject currentlevel=roomgen.gameObject;
         if (!(room.lastroom == new Vector3Int(0,0,0)))
         {
 
@@ -164,7 +173,7 @@ public class towergen : MonoBehaviour
                 currentlevel = Instantiate(toplace, roomgen.position, Quaternion.identity, roomgen);
             }
         }
-        if (lastgenlevel != null)
+        /*if (lastgenlevel != null)
         {
             if ((currentlevel.transform.position-lastgenlevel.transform.position).y == 0)
             {
@@ -192,7 +201,7 @@ public class towergen : MonoBehaviour
         else
         {
             lastgenlevel = currentlevel;
-        }
+        }*/
     }
     public void deleteroom() 
     {
@@ -241,7 +250,7 @@ public class towergen : MonoBehaviour
         
         if (rooms.Count > 1)
         {
-            for (int i = 0; i < rooms.Count - 1; i++)
+            for (int i = 0; i < rooms.Count - 4; i++)
             {
                 Gizmos.color = Color.red;
                 Gizmos.DrawLine(rooms[i].room, rooms[i + 1].room);
@@ -297,6 +306,30 @@ public class towergen : MonoBehaviour
             }
         }
         return false;
+    }
+    public void randomholegen(Vector3 center,int shots) 
+    {
+        for (int i = 0; i < shots; i++)
+        {
+            Vector3 randdir = new Vector3(Random.Range(-1f,1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+            
+            if (Physics.Raycast(center, randdir, out RaycastHit hit, 48, holelayer))
+            {
+                Debug.Log("rayhit");
+                RaycastHit[] hits = Physics.SphereCastAll(hit.point, 4.5f, -hit.normal, 100, holelayer);
+                foreach (RaycastHit item in hits)
+                {
+                    Debug.Log("ballhit");
+                    Destroy(item.collider.gameObject);
+                    if (item.collider.gameObject.layer == holelayer)
+                    {
+                        
+                        
+                    }
+                    
+                }
+            }
+        }
     }
 
 }

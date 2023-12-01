@@ -398,11 +398,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AgentTypeID: 0
   m_CollectObjects: 1
-  m_Size: {x: 33, y: 33, z: 33}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_GenerateLinks: 1
@@ -413,7 +413,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: adda640ef1ee72f4abf8aea3e18171bb, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 6773a4e713e5e5348b61d3dea7615086, type: 2}
   m_BuildHeightMesh: 1
 --- !u!1 &2291675019184677703
 GameObject:
@@ -955,6 +955,7 @@ MonoBehaviour:
   isterrain: 1
   stuntimer: 0
   rottimer: 0
+  linkdistance: 2
 --- !u!114 &5798200338650206945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2276,6 +2277,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: crystaldude1 (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 864532824907182685, guid: 497f3798c4e346641ba994856038e6ea,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 942185331153569387, guid: 497f3798c4e346641ba994856038e6ea,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -2364,6 +2370,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: crystaldude1 (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 864532824907182685, guid: 497f3798c4e346641ba994856038e6ea,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 942185331153569387, guid: 497f3798c4e346641ba994856038e6ea,
         type: 3}
@@ -2454,6 +2465,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: crystaldude1 (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 864532824907182685, guid: 497f3798c4e346641ba994856038e6ea,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 942185331153569387, guid: 497f3798c4e346641ba994856038e6ea,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -2543,6 +2559,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: crystaldude1 (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 864532824907182685, guid: 497f3798c4e346641ba994856038e6ea,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 942185331153569387, guid: 497f3798c4e346641ba994856038e6ea,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -2631,6 +2652,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: crystaldude1 (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 864532824907182685, guid: 497f3798c4e346641ba994856038e6ea,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 942185331153569387, guid: 497f3798c4e346641ba994856038e6ea,
         type: 3}

@@ -301,6 +301,7 @@ GameObject:
   - component: {fileID: 7193292231927841947}
   - component: {fileID: 8521256608578700811}
   - component: {fileID: 1462601960435072181}
+  - component: {fileID: -5267376749422950880}
   m_Layer: 0
   m_Name: crystaldude1
   m_TagString: Untagged
@@ -393,11 +394,12 @@ MonoBehaviour:
   Player: {fileID: 0}
   PlayerPos: {x: 0, y: 0, z: 0}
   visiondistance: 16
-  attackdistance: 3
+  attackdistance: 2
   rb: {fileID: 8521256608578700811}
   isterrain: 0
   stuntimer: 0
   rottimer: 0.01
+  linkdistance: 2
 --- !u!54 &8521256608578700811
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -448,6 +450,23 @@ CapsuleCollider:
   m_Height: 4
   m_Direction: 1
   m_Center: {x: 0, y: 2, z: 0}
+--- !u!191 &-5267376749422950880
+OffMeshLink:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864532824907182685}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_AreaIndex: 0
+  m_AgentTypeID: 0
+  m_Start: {fileID: 0}
+  m_End: {fileID: 0}
+  m_CostOverride: -1
+  m_BiDirectional: 0
+  m_Activated: 1
+  m_AutoUpdatePositions: 0
 --- !u!1 &1514176625262696100
 GameObject:
   m_ObjectHideFlags: 0

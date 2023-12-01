@@ -22,9 +22,19 @@ public class Enemy1 : MonoBehaviour
     public bool isterrain = true;
     public float stuntimer;
     public float rottimer;
+    private Transform startlink;
+    private Transform endlink;
+    private OffMeshLink offlink;
+    public float linkdistance = 2f;
     // Start is called before the first frame update
     void Start()
     {
+        /*offlink = GetComponent<OffMeshLink>();
+        startlink = new GameObject().transform;
+        endlink = new GameObject().transform;
+        startlink.parent = transform;
+        endlink.parent = transform;
+        */
         Player = GameObject.Find("player").transform;
         if (isterrain)
         {
@@ -71,6 +81,22 @@ public class Enemy1 : MonoBehaviour
         }
         
     }
+    public void traverselink()
+    {
+        offlink.startTransform = startlink;
+        offlink.endTransform = endlink;
+        startlink.position = transform.position;
+        endlink.position = agent.nextPosition + (Player.position - transform.position).normalized * 2f;
+        offlink.UpdatePositions();
+        NavMeshHit hit1;
+        NavMeshHit hit2;
+        NavMesh.SamplePosition(endlink.position, out hit1, 3, 1 << NavMesh.GetAreaFromName("Walkable"));
+        NavMesh.SamplePosition(endlink.position, out hit2, 3, 1 << NavMesh.GetAreaFromName("Walkable"));
+        if (hit1.mask!=hit2.mask)
+        {
+            agent.ActivateCurrentOffMeshLink(true);
+        }
+    }
 
     public void movement()
     {
@@ -78,10 +104,17 @@ public class Enemy1 : MonoBehaviour
 
         if ((agent.isOnNavMesh || agent.isOnOffMeshLink) && stuntimer <= 0 && Vector3.Distance(transform.position, Player.position) <= visiondistance)
         {
+
+            
+
+            
+            
             rb.isKinematic = true;
             agent.enabled = true;
-            if (PlayerPos != Player.position)
+            if (agent.destination != Player.position)
             {
+                
+                //traverselink();
                 agent.destination = Player.position;
                 PlayerPos = Player.position;
             }
@@ -118,10 +151,25 @@ public class Enemy1 : MonoBehaviour
                     }
                     else
                     {
-                        agent.enabled = true;
-                        rb.isKinematic = true;
-                        agent.destination = Player.position;
-                        PlayerPos = Player.position;
+                        try
+                        { 
+
+                                 agent.enabled = true;
+                                rb.isKinematic = true;
+                        if (agent.isActiveAndEnabled)
+                            {
+                                
+                                //gent.destination = Player.position;
+                                //PlayerPos = Player.position;
+                            }
+
+                        }
+                        catch (Exception)
+                        {
+
+                            throw;
+                        }
+
                     }
                 }
                 catch (Exception)
@@ -134,12 +182,14 @@ public class Enemy1 : MonoBehaviour
 
 
             }
-            if (agent.isActiveAndEnabled)
+            /*if (agent.isActiveAndEnabled)
             {
+                agent.enabled = true;
                 agent.isStopped = true;
-            }
+            }*/
 
 
         }
     }
+
 }
